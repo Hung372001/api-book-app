@@ -1,0 +1,116 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             Int      @id @default(autoincrement())
+  email          String   @unique
+  hashedPassword String
+  FirstName      String
+  LastName       String
+  phoneNumber    String   @unique
+  createdAt      DateTime @default(now())
+  updateAt       DateTime @updatedAt()
+}
+
+model TacGia {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  book      Book[]
+  createdAt DateTime @default(now())
+  updateAt  DateTime @updatedAt()
+}
+
+model NhaXuatBan {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  book      Book[]
+  createdAt DateTime @default(now())
+  updateAt  DateTime @updatedAt()
+}
+
+model NhaCungCap {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  book      Book[]
+  createdAt DateTime @default(now())
+  updateAt  DateTime @updatedAt()
+}
+
+model Bia {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  book      Book[]
+  createdAt DateTime @default(now())
+  updateAt  DateTime @updatedAt()
+}
+
+model TheLoai {
+  id            Int          @id @default(autoincrement())
+  name          String       @unique
+  book          Book[]
+  loaiSach      LoaiSach     @relation(fields: [loaiSachId], references: [id])
+  loaiSachId    Int
+  createdAt     DateTime     @default(now())
+  updateAt      DateTime     @updatedAt()
+  NgonNguSach   NgonNguSach? @relation(fields: [ngonNguSachId], references: [id])
+  ngonNguSachId Int?
+}
+
+model LoaiSach {
+  id            Int          @id @default(autoincrement())
+  name          String       @unique
+  book          Book[]
+  theLoai       TheLoai[]
+  createdAt     DateTime     @default(now())
+  updateAt      DateTime     @updatedAt()
+  NgonNguSach   NgonNguSach? @relation(fields: [ngonNguSachId], references: [id])
+  ngonNguSachId Int?
+}
+
+model NgonNguSach {
+  id        Int        @id @default(autoincrement())
+  name      String     @unique
+  loaiSach  LoaiSach[]
+  createdAt DateTime   @default(now())
+  updateAt  DateTime   @updatedAt()
+
+  TheLoai TheLoai[]
+  Book    Book[]
+}
+
+model BookName {
+  id      Int    @id @default(autoincrement())
+  name    String @unique
+  bookImg String
+  book    Book?
+}
+
+model Book {
+  id             Int          @id @default(autoincrement())
+  bookName       BookName     @relation(fields: [nameBook], references: [name])
+  nameBook       String       @unique
+  theLoai        TheLoai      @relation(fields: [TheLoaiName], references: [name])
+  TheLoaiName    String
+  tacGia         TacGia       @relation(fields: [tacGiaName], references: [name])
+  tacGiaName     String
+  bia            Bia          @relation(fields: [biaName], references: [name])
+  biaName        String
+  loaiSach       LoaiSach     @relation(fields: [loaiSachName], references: [name])
+  loaiSachName   String
+  nhaXuatBan     NhaXuatBan   @relation(fields: [nhaXuatBanName], references: [name])
+  nhaXuatBanName String
+  nhaCungCap     NhaCungCap   @relation(fields: [nhaCungCapName], references: [name])
+  nhaCungCapName String
+  gia            Int
+  NgonNguSach    NgonNguSach? @relation(fields: [ngonNguSachId], references: [id])
+  ngonNguSachId  Int?
+}
