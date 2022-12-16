@@ -1,6 +1,8 @@
 import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { BookService } from './book.service';
 import { Book as BookModel } from '@prisma/client';
+import { LoaiSach } from 'src/loai-sach/entities/loai-sach.entity';
+import { TheLoai } from 'src/the-loai/entities/the-loai.entity';
 @Controller('book')
 export class BookController {
   constructor(private readonly bookService: BookService) {}
@@ -96,27 +98,23 @@ export class BookController {
     return this.bookService.findLoaiSach(max);
   }
 
-  @Get('fillter/:min&:max&:nxp&:tacgia&:category&:loaiSach')
+  @Get('get/:min&:max&:loaisach&:theloai')
+  getBookCateAndPrice(
+    @Param('min') min: number,
+    @Param('max') max: number,
+    @Param('loaisach') LoaiSach: string,
+    @Param('theloai') TheLoai: string,
+  ) {
+    return this.bookService.getBookCateAndPrice(min, max, LoaiSach, TheLoai);
+  }
+
+  @Get('fillter/:min&:max&:loaiSach')
   getBookCate(
     @Param('min') min: number,
     @Param('max') max: number,
-    @Param('nxp') nxp: string,
-    @Param('tacgia') tacGia: string,
-    @Param('category') category: string,
     @Param('loaiSach') LoaiSach: string,
   ) {
-    if (tacGia == ' ') {
-      console.log(123);
-    }
-
-    return this.bookService.getBookCate(
-      min,
-      max,
-      nxp,
-      tacGia,
-      category,
-      LoaiSach,
-    );
+    return this.bookService.getBookCate(min, max, LoaiSach);
   }
 
   @Delete(':id')

@@ -138,18 +138,40 @@ export class BookService {
   async getBookCate(
     min: number,
     max: number,
-    nhaXuatBanName: string,
-    tacGiaName: string,
-    TheLoaiName: string,
+
     loaiSachName: string,
   ) {
     const findBookName = await this.prisma.book.findMany({
       where: {
-        nhaXuatBanName,
-        tacGiaName,
-        TheLoaiName,
         loaiSachName,
 
+        gia: {
+          gte: Number(min),
+          lte: Number(max),
+        },
+      },
+      select: {
+        bookName: true,
+        theLoai: true,
+        tacGia: true,
+        bia: true,
+        loaiSach: true,
+        nhaCungCap: true,
+        gia: true,
+      },
+    });
+    return { findBookName };
+  }
+  async getBookCateAndPrice(
+    min: number,
+    max: number,
+    loaiSachName: string,
+    TheLoaiName: string,
+  ) {
+    const findBookName = await this.prisma.book.findMany({
+      where: {
+        TheLoaiName,
+        loaiSachName,
         gia: {
           gte: Number(min),
           lte: Number(max),
