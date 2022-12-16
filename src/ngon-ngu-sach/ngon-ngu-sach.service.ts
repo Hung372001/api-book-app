@@ -15,9 +15,12 @@ export class NgonNguSachService {
       select: {
         id: true,
         name: true,
-        loaiSach: true,
-        TheLoai: true,
-        Book: true,
+        loaiSach: {
+          select: {
+            name: true,
+            theLoai: true,
+          },
+        },
       },
     });
     return { ngonNguSach };
