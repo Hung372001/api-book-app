@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { BookService } from './book.service';
 import { Book as BookModel } from '@prisma/client';
 @Controller('book')
@@ -117,5 +117,10 @@ export class BookController {
       category,
       LoaiSach,
     );
+  }
+
+  @Delete(':id')
+  remove(@Param('id') id: number) {
+    return this.bookService.remove(+id);
   }
 }

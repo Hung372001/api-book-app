@@ -177,9 +177,9 @@ export class BookService {
       where,
     });
   }
-  // async remove(bookname: string) {
-  //   return await this.prisma.book.delete({
-  //     where: { bookname },
-  //   });
-  // }
+  async remove(id: number) {
+    return await this.prisma.book.delete({
+      where: { id },
+    });
+  }
 }
