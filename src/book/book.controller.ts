@@ -91,4 +91,31 @@ export class BookController {
   getBookPrice(@Param('min') min: number, @Param('max') max: number) {
     return this.bookService.getBookPrice(min, max);
   }
+  @Get('fillterPrice/:loaiSach')
+  findLoaiSach(@Param('loaiSach') max: string) {
+    return this.bookService.findLoaiSach(max);
+  }
+
+  @Get('fillter/:min&:max&:nxp&:tacgia&:category&:loaiSach')
+  getBookCate(
+    @Param('min') min: number,
+    @Param('max') max: number,
+    @Param('nxp') nxp: string,
+    @Param('tacgia') tacGia: string,
+    @Param('category') category: string,
+    @Param('loaiSach') LoaiSach: string,
+  ) {
+    if (tacGia == ' ') {
+      console.log(123);
+    }
+
+    return this.bookService.getBookCate(
+      min,
+      max,
+      nxp,
+      tacGia,
+      category,
+      LoaiSach,
+    );
+  }
 }

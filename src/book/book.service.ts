@@ -55,6 +55,36 @@ export class BookService {
     });
     return { findBookName };
   }
+  async findLoaiSach(loaiSachName: string) {
+    const findBookName = await this.prisma.book.findMany({
+      where: { loaiSachName },
+      select: {
+        bookName: true,
+        theLoai: true,
+        tacGia: true,
+        bia: true,
+        loaiSach: true,
+        nhaCungCap: true,
+        gia: true,
+      },
+    });
+    return { findBookName };
+  }
+  async findLoaiSachTheLoai(loaiSachName: string, TheLoaiName: string) {
+    const findBookName = await this.prisma.book.findMany({
+      where: { loaiSachName, TheLoaiName },
+      select: {
+        bookName: true,
+        theLoai: true,
+        tacGia: true,
+        bia: true,
+        loaiSach: true,
+        nhaCungCap: true,
+        gia: true,
+      },
+    });
+    return { findBookName };
+  }
   async findTacGia(tacGiaName: string) {
     const findBookName = await this.prisma.book.findMany({
       where: { tacGiaName },
@@ -88,6 +118,38 @@ export class BookService {
   async getBookPrice(min: number, max: number) {
     const findBookName = await this.prisma.book.findMany({
       where: {
+        gia: {
+          gte: Number(min),
+          lte: Number(max),
+        },
+      },
+      select: {
+        bookName: true,
+        theLoai: true,
+        tacGia: true,
+        bia: true,
+        loaiSach: true,
+        nhaCungCap: true,
+        gia: true,
+      },
+    });
+    return { findBookName };
+  }
+  async getBookCate(
+    min: number,
+    max: number,
+    nhaXuatBanName: string,
+    tacGiaName: string,
+    TheLoaiName: string,
+    loaiSachName: string,
+  ) {
+    const findBookName = await this.prisma.book.findMany({
+      where: {
+        nhaXuatBanName,
+        tacGiaName,
+        TheLoaiName,
+        loaiSachName,
+
         gia: {
           gte: Number(min),
           lte: Number(max),
