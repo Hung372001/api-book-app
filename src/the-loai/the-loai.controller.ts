@@ -20,13 +20,17 @@ export class TheLoaiController {
     theLoaiData: {
       name: string;
       loaiSachName: string;
+      ngonNguSachName: string;
     },
   ): Promise<TheLoaiModel> {
-    const { name, loaiSachName } = theLoaiData;
+    const { name, loaiSachName, ngonNguSachName } = theLoaiData;
     return this.theLoaiService.create({
       name,
       loaiSach: {
         connect: { name: loaiSachName },
+      },
+      NgonNguSach: {
+        connect: { name: ngonNguSachName },
       },
     });
   }
@@ -43,14 +47,15 @@ export class TheLoaiController {
 
   @Patch(':id')
   update(
-    @Param('id') id: string,
+    @Param('id') id: number,
     @Body()
     theLoaiData: {
       name: string;
       loaiSachName: string;
+      ngonNguSachId: number;
     },
   ): Promise<TheLoaiModel> {
-    const { name, loaiSachName } = theLoaiData;
+    const { name, loaiSachName, ngonNguSachId } = theLoaiData;
     return this.theLoaiService.update({
       where: { id: Number(id) },
       data: {

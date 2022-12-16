@@ -58,11 +58,11 @@ model TheLoai {
   name          String       @unique
   book          Book[]
   loaiSach      LoaiSach     @relation(fields: [loaiSachId], references: [id])
+  NgonNguSach   NgonNguSach? @relation(fields: [ngonNguSachId], references: [id])
+  ngonNguSachId Int?
   loaiSachId    Int
   createdAt     DateTime     @default(now())
   updateAt      DateTime     @updatedAt()
-  NgonNguSach   NgonNguSach? @relation(fields: [ngonNguSachId], references: [id])
-  ngonNguSachId Int?
 }
 
 model LoaiSach {
