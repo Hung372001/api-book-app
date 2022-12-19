@@ -36,7 +36,24 @@ export class UsersService {
   }
   async getUsers() {
     const users = await this.prisma.user.findMany({
-      select: { id: true, email: true },
+      select: {
+        id: true,
+        email: true,
+        parantOrder: {
+          select: {
+            id: true,
+            nameNguoiNhan: true,
+            SoDienThoai: true,
+            email: true,
+            order: true,
+            ThanhPho: true,
+            QuanHuyen: true,
+            XaPhuong: true,
+            DiaChi: true,
+            price: true,
+          },
+        },
+      },
     });
 
     return { users };

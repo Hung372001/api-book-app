@@ -14,6 +14,7 @@ import { BookModule } from './book/book.module';
 import { BookNameModule } from './book-name/book-name.module';
 import { ConfigModule } from '@nestjs/config';
 import { NgonNguSachModule } from './ngon-ngu-sach/ngon-ngu-sach.module';
+import { OrderPrantModule } from './order-prant/order-prant.module';
 
 @Module({
   imports: [
@@ -30,6 +31,8 @@ import { NgonNguSachModule } from './ngon-ngu-sach/ngon-ngu-sach.module';
     BookNameModule,
     ConfigModule.forRoot(),
     NgonNguSachModule,
+
+    OrderPrantModule,
   ],
   // controllers: [AppController],
   // providers: [AppService],

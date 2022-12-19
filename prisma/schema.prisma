@@ -11,14 +11,15 @@ datasource db {
 }
 
 model User {
-  id             Int      @id @default(autoincrement())
-  email          String   @unique
+  id             Int           @id @default(autoincrement())
+  email          String        @unique
   hashedPassword String
   FirstName      String
   LastName       String
-  phoneNumber    String   @unique
-  createdAt      DateTime @default(now())
-  updateAt       DateTime @updatedAt()
+  parantOrder    ParantOrder[]
+  phoneNumber    String        @unique
+  createdAt      DateTime      @default(now())
+  updateAt       DateTime      @updatedAt()
 }
 
 model TacGia {
@@ -82,9 +83,8 @@ model NgonNguSach {
   loaiSach  LoaiSach[]
   createdAt DateTime   @default(now())
   updateAt  DateTime   @updatedAt()
-
-  TheLoai TheLoai[]
-  Book    Book[]
+  TheLoai   TheLoai[]
+  Book      Book[]
 }
 
 model BookName {
@@ -92,6 +92,22 @@ model BookName {
   name    String @unique
   bookImg String
   book    Book?
+}
+
+model ParantOrder {
+  id            Int     @id @default(autoincrement())
+  nameNguoiNhan String
+  SoDienThoai   String
+  email         String
+  order         Json?
+  ThanhPho      String
+  QuanHuyen     String
+  XaPhuong      String
+  DiaChi        String
+  price         Int
+  User          User?   @relation(fields: [userName], references: [email])
+  userName      String?
+  trangThai     String?
 }
 
 model Book {
@@ -110,7 +126,7 @@ model Book {
   nhaXuatBanName String
   nhaCungCap     NhaCungCap   @relation(fields: [nhaCungCapName], references: [name])
   nhaCungCapName String
-  gia            Int
+  gia            Int          @unique
   NgonNguSach    NgonNguSach? @relation(fields: [ngonNguSachId], references: [id])
   ngonNguSachId  Int?
 }
