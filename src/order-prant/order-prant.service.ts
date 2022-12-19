@@ -38,4 +38,12 @@ export class OrderPrantService {
       where,
     });
   }
+  async remove(id: number) {
+    return await this.prisma.parantOrder.delete({
+      where: { id },
+    });
+  }
+  async removeAll() {
+    return await this.prisma.parantOrder.deleteMany({});
+  }
 }

@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { OrderPrantService } from './order-prant.service';
 import { ParantOrder, Prisma } from '@prisma/client';
 // import { Json } from './interface/interface.json';
@@ -95,5 +103,13 @@ export class OrderPrantController {
         ...theLoaiData,
       },
     });
+  }
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.orderPrantService.remove(+id);
+  }
+  @Delete('')
+  removeAll() {
+    return this.orderPrantService.removeAll();
   }
 }
