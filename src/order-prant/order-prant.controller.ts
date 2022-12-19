@@ -54,7 +54,7 @@ export class OrderPrantController {
       SoDienThoai: '',
       email: '',
       ThanhPho: '',
-      order: json,
+      order,
       QuanHuyen: '',
       XaPhuong: '',
       DiaChi: '',
