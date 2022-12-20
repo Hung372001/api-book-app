@@ -25,27 +25,27 @@ export class OrderPrantController {
   create(
     @Body()
     theLoaiData: {
-      nameNguoiNhan: string;
-      SoDienThoai: string;
+      name: string;
+      phoneNumber: string;
       email: string;
       ThanhPho: string;
       order;
       QuanHuyen: string;
       XaPhuong: string;
-      DiaChi: string;
+      diaChi: string;
       price: number;
       trangThai: string;
     },
   ): Promise<ParantOrder> {
     const {
-      nameNguoiNhan,
-      SoDienThoai,
+      name,
+      phoneNumber,
       email,
       ThanhPho,
       order,
       QuanHuyen,
       XaPhuong,
-      DiaChi,
+      diaChi,
       price,
       trangThai,
     } = theLoaiData;
