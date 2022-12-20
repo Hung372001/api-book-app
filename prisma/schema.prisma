@@ -126,7 +126,7 @@ model Book {
   nhaXuatBanName String
   nhaCungCap     NhaCungCap   @relation(fields: [nhaCungCapName], references: [name])
   nhaCungCapName String
-  gia            Int          @unique
+  gia            Int
   NgonNguSach    NgonNguSach? @relation(fields: [ngonNguSachId], references: [id])
   ngonNguSachId  Int?
 }
