@@ -25,40 +25,40 @@ export class OrderPrantController {
   create(
     @Body()
     theLoaiData: {
-      name: string;
-      phoneNumber: string;
+      nameNguoiNhan: string;
+      SoDienThoai: string;
       email: string;
       ThanhPho: string;
       order;
       QuanHuyen: string;
       XaPhuong: string;
-      diaChi: string;
+      DiaChi: string;
       price: number;
       trangThai: string;
     },
   ): Promise<ParantOrder> {
     const {
-      name,
-      phoneNumber,
+      nameNguoiNhan,
+      SoDienThoai,
       email,
       ThanhPho,
       order,
       QuanHuyen,
       XaPhuong,
-      diaChi,
+      DiaChi,
       price,
       trangThai,
     } = theLoaiData;
     return this.orderPrantService.create({
-      nameNguoiNhan: '',
-      SoDienThoai: '',
-      email: '',
-      ThanhPho: '',
+      nameNguoiNhan,
+      SoDienThoai,
+      email,
+      ThanhPho,
       order,
-      QuanHuyen: '',
-      XaPhuong: '',
-      DiaChi: '',
-      price: 0,
+      QuanHuyen,
+      XaPhuong,
+      DiaChi,
+      price,
       trangThai: 'Chua Xac Nhan',
     });
   }
