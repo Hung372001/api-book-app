@@ -104,7 +104,7 @@ model ParantOrder {
   QuanHuyen     String
   XaPhuong      String
   DiaChi        String
-  price         Int
+  price         String
   User          User?   @relation(fields: [userName], references: [email])
   userName      String?
   trangThai     String?

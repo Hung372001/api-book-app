@@ -33,7 +33,7 @@ export class OrderPrantController {
       QuanHuyen: string;
       XaPhuong: string;
       DiaChi: string;
-      price: number;
+      price: string;
       trangThai: string;
     },
   ): Promise<ParantOrder> {
@@ -80,7 +80,7 @@ export class OrderPrantController {
       QuanHuyen: string;
       XaPhuong: string;
       DiaChi: string;
-      price: number;
+      price: string;
       trangThai: string;
     },
   ): Promise<ParantOrder> {
