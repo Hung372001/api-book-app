@@ -18,6 +18,8 @@ export class BookController {
       nhaXuatBanname: string;
       nhaCungCapname: string;
       gia: number;
+      isHot: boolean;
+      isHotSearch: boolean;
     },
   ): Promise<BookModel> {
     const {
@@ -29,6 +31,8 @@ export class BookController {
       nhaXuatBanname,
       nhaCungCapname,
       gia,
+      isHot,
+      isHotSearch,
     } = theLoaiData;
     return this.bookService.create({
       bookName: {
@@ -67,6 +71,8 @@ export class BookController {
         },
       },
       gia,
+      isHot: false,
+      isHotSearch: false,
     });
   }
   @Get()

@@ -129,4 +129,6 @@ model Book {
   gia            Int
   NgonNguSach    NgonNguSach? @relation(fields: [ngonNguSachId], references: [id])
   ngonNguSachId  Int?
+  isHot          Boolean?
+  isHotSearch    Boolean?
 }

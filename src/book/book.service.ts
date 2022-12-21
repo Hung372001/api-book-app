@@ -22,6 +22,8 @@ export class BookService {
         loaiSach: true,
         nhaCungCap: true,
         gia: true,
+        isHot: true,
+        isHotSearch: true,
       },
     });
     return { book };
@@ -37,6 +39,8 @@ export class BookService {
         loaiSach: true,
         nhaCungCap: true,
         gia: true,
+        isHot: true,
+        isHotSearch: true,
       },
     });
     return { findBookName };
