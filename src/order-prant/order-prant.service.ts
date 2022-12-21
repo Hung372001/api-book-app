@@ -27,6 +27,42 @@ export class OrderPrantService {
     });
     return { order };
   }
+  async getOrderbyEmail(email: string) {
+    const order = await this.prisma.parantOrder.findMany({
+      where: { email },
+      select: {
+        id: true,
+        nameNguoiNhan: true,
+        SoDienThoai: true,
+        email: true,
+        order: true,
+        ThanhPho: true,
+        QuanHuyen: true,
+        XaPhuong: true,
+        DiaChi: true,
+        price: true,
+      },
+    });
+    return { order };
+  }
+  async getOrderbyId(id: number) {
+    const order = await this.prisma.parantOrder.findUnique({
+      where: { id },
+      select: {
+        id: true,
+        nameNguoiNhan: true,
+        SoDienThoai: true,
+        email: true,
+        order: true,
+        ThanhPho: true,
+        QuanHuyen: true,
+        XaPhuong: true,
+        DiaChi: true,
+        price: true,
+      },
+    });
+    return { order };
+  }
 
   async update(params: {
     where: Prisma.ParantOrderWhereUniqueInput;

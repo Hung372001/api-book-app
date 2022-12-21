@@ -66,6 +66,15 @@ export class OrderPrantController {
   findAll() {
     return this.orderPrantService.findAll();
   }
+
+  @Get(':id')
+  async findOne(@Param('id') id: number) {
+    return await this.orderPrantService.getOrderbyId(+id);
+  }
+  @Get('email/:email')
+  async findOrEmail(@Param('email') email: string) {
+    return await this.orderPrantService.getOrderbyEmail(email);
+  }
   @Patch(':id')
   update(
     @Param('id') id: string,
