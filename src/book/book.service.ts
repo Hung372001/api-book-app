@@ -14,6 +14,7 @@ export class BookService {
   async findAll() {
     const book = await this.prisma.book.findMany({
       select: {
+        id: true,
         bookName: true,
         theLoai: true,
         tacGia: true,
