@@ -83,7 +83,10 @@ export class BookNameController {
   remove(@Param('id') id: string) {
     return this.bookNameService.remove(+id);
   }
-
+  @Delete('')
+  removeAll() {
+    return this.bookNameService.removeAll();
+  }
   @Get('img/:imagename')
   getImg(@Param('imagename') imagename, @Res() res): Observable<Object> {
     console.log(imagename);

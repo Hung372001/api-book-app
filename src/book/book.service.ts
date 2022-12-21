@@ -209,4 +209,7 @@ export class BookService {
       where: { id },
     });
   }
+  async removeAll() {
+    return await this.prisma.book.deleteMany({});
+  }
 }

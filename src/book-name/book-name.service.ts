@@ -48,6 +48,9 @@ export class BookNameService {
       where: { id },
     });
   }
+  async removeAll() {
+    return await this.prisma.bookName.deleteMany({});
+  }
   removeImg(directoryPath: string, fileName: string) {
     fs.unlink(directoryPath + fileName, (err) => {
       if (err) {

@@ -127,4 +127,8 @@ export class BookController {
   remove(@Param('id') id: number) {
     return this.bookService.remove(+id);
   }
+  @Delete('')
+  removeAll() {
+    return this.bookService.removeAll();
+  }
 }
