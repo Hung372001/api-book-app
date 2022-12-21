@@ -120,8 +120,10 @@ export class BookService {
     });
     return { findBookName };
   }
-  async getBookPrice(min: number, max: number) {
+  async getBookPrice(min: number, max: number, page: number) {
     const findBookName = await this.prisma.book.findMany({
+      take: 12,
+      skip: (page - 1) * 3,
       where: {
         gia: {
           gte: Number(min),
@@ -143,10 +145,12 @@ export class BookService {
   async getBookCate(
     min: number,
     max: number,
-
     loaiSachName: string,
+    page: number,
   ) {
     const findBookName = await this.prisma.book.findMany({
+      take: 12,
+      skip: (page - 1) * 3,
       where: {
         loaiSachName,
 
@@ -172,8 +176,11 @@ export class BookService {
     max: number,
     loaiSachName: string,
     TheLoaiName: string,
+    page: number,
   ) {
     const findBookName = await this.prisma.book.findMany({
+      take: 12,
+      skip: (page - 1) * 3,
       where: {
         TheLoaiName,
         loaiSachName,

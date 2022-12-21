@@ -95,32 +95,44 @@ export class BookController {
   findNhaXuatBan(@Param('nxp') category: string) {
     return this.bookService.findNhaXuatBan(category);
   }
-  @Get('fillterPrice/:min&:max')
-  getBookPrice(@Param('min') min: number, @Param('max') max: number) {
-    return this.bookService.getBookPrice(min, max);
+  @Get('fillterPrice/:min&:max?page=:page')
+  getBookPrice(
+    @Param('min') min: number,
+    @Param('max') max: number,
+    @Param('page') page: number,
+  ) {
+    return this.bookService.getBookPrice(min, max, page);
   }
   @Get('fillterPrice/:loaiSach')
   findLoaiSach(@Param('loaiSach') max: string) {
     return this.bookService.findLoaiSach(max);
   }
 
-  @Get('get/:min&:max&:loaisach&:theloai')
+  @Get('get/:min&:max&:loaisach&:theloai?page=:page')
   getBookCateAndPrice(
     @Param('min') min: number,
     @Param('max') max: number,
     @Param('loaisach') LoaiSach: string,
     @Param('theloai') TheLoai: string,
+    @Param('page') page: number,
   ) {
-    return this.bookService.getBookCateAndPrice(min, max, LoaiSach, TheLoai);
+    return this.bookService.getBookCateAndPrice(
+      min,
+      max,
+      LoaiSach,
+      TheLoai,
+      page,
+    );
   }
 
-  @Get('fillter/:min&:max&:loaiSach')
+  @Get('fillter/:min&:max&:loaiSach?page=:page')
   getBookCate(
     @Param('min') min: number,
     @Param('max') max: number,
     @Param('loaiSach') LoaiSach: string,
+    @Param('page') page: number,
   ) {
-    return this.bookService.getBookCate(min, max, LoaiSach);
+    return this.bookService.getBookCate(min, max, LoaiSach, page);
   }
 
   @Delete(':id')

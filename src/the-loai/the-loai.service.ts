@@ -19,7 +19,14 @@ export class TheLoaiService {
     });
     return { theLoai };
   }
-
+  async findPagination(page: number) {
+    const theLoai = await this.prisma.theLoai.findMany({
+      take: 3,
+      skip: (page - 1) * 3,
+      select: { id: true, name: true, loaiSach: true, book: true },
+    });
+    return { theLoai };
+  }
   async findOne(id: number) {
     const findtheLoai = await this.prisma.theLoai.findUnique({
       where: { id },

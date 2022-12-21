@@ -40,6 +40,10 @@ export class TheLoaiController {
     return this.theLoaiService.findAll();
   }
 
+  @Get('/page=:page')
+  findPagination(@Param('page') page: number) {
+    return this.theLoaiService.findPagination(+page);
+  }
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.theLoaiService.findOne(+id);
