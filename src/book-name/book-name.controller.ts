@@ -13,6 +13,7 @@ import {
 import { BookNameService } from './book-name.service';
 import { BookName as BookNameModel } from '@prisma/client';
 import { FileInterceptor } from '@nestjs/platform-express';
+const fs = require('fs');
 
 import { Observable, of } from 'rxjs';
 import { diskStorage } from 'multer';
@@ -82,9 +83,19 @@ export class BookNameController {
   remove(@Param('id') id: string) {
     return this.bookNameService.remove(+id);
   }
+
   @Get('img/:imagename')
   getImg(@Param('imagename') imagename, @Res() res): Observable<Object> {
     console.log(imagename);
     return of(res.sendFile(join(process.cwd(), 'uploads/' + imagename)));
+  }
+  @Delete('img/:imagename')
+  deleteImg(@Param('imagename') imagename) {
+    fs.unlink('uploads/' + imagename, (err) => {
+      if (err) {
+        throw err;
+      }
+    });
+    return { message: 'Xóa thành công' };
   }
 }

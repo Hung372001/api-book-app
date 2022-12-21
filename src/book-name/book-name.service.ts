@@ -3,6 +3,7 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'prisma/prisma.service';
 
 import { Prisma, BookName } from '@prisma/client';
+const fs = require('fs');
 
 @Injectable()
 export class BookNameService {
@@ -46,5 +47,13 @@ export class BookNameService {
     return await this.prisma.bookName.delete({
       where: { id },
     });
+  }
+  removeImg(directoryPath: string, fileName: string) {
+    fs.unlink(directoryPath + fileName, (err) => {
+      if (err) {
+        throw err;
+      }
+    });
+    return { messeage: 'Xoa Thanh Cong' };
   }
 }
