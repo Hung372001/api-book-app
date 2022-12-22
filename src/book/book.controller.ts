@@ -125,7 +125,7 @@ export class BookController {
     );
   }
 
-  @Get('fillter/:min&:max&:loaiSach?page=:page')
+  @Get('fillter/:min&:max&:loaiSach/page=:page')
   getBookCate(
     @Param('min') min: number,
     @Param('max') max: number,
@@ -134,7 +134,7 @@ export class BookController {
   ) {
     return this.bookService.getBookCate(min, max, LoaiSach, page);
   }
-  @Get('search/:search?page=:page')
+  @Get('search/:search/page=:page')
   searchBook(@Param('search') search: string, @Param('page') page: number) {
     return this.bookService.searchBook(search, page);
   }
