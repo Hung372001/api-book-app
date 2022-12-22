@@ -120,6 +120,31 @@ export class BookService {
     });
     return { findBookName };
   }
+  async searchBook(searchBook: string, page: number) {
+    const findBookName = await this.prisma.book.findMany({
+      take: 12,
+      skip: (page - 1) * 3,
+      where: {
+        OR: [
+          {
+            nameBook: {
+              contains: searchBook,
+            },
+          },
+        ],
+      },
+      select: {
+        bookName: true,
+        theLoai: true,
+        tacGia: true,
+        bia: true,
+        loaiSach: true,
+        nhaCungCap: true,
+        gia: true,
+      },
+    });
+    return { findBookName };
+  }
   async getBookPrice(min: number, max: number, page: number) {
     const findBookName = await this.prisma.book.findMany({
       take: 12,
@@ -216,6 +241,7 @@ export class BookService {
       where: { id },
     });
   }
+
   async removeAll() {
     return await this.prisma.book.deleteMany({});
   }

@@ -134,7 +134,10 @@ export class BookController {
   ) {
     return this.bookService.getBookCate(min, max, LoaiSach, page);
   }
-
+  @Get('search/:search?page=:page')
+  searchBook(@Param('search') search: string, @Param('page') page: number) {
+    return this.bookService.searchBook(search, page);
+  }
   @Delete(':id')
   remove(@Param('id') id: number) {
     return this.bookService.remove(+id);
