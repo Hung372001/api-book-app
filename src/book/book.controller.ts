@@ -1,4 +1,12 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { BookService } from './book.service';
 import { Book as BookModel } from '@prisma/client';
 import { LoaiSach } from 'src/loai-sach/entities/loai-sach.entity';
@@ -95,7 +103,7 @@ export class BookController {
   findNhaXuatBan(@Param('nxp') category: string) {
     return this.bookService.findNhaXuatBan(category);
   }
-  @Get('fillterPrice/:min&:max?page=:page')
+  @Get('fillterPrice/:min&:max/page=:page')
   getBookPrice(
     @Param('min') min: number,
     @Param('max') max: number,
@@ -108,7 +116,7 @@ export class BookController {
     return this.bookService.findLoaiSach(max);
   }
 
-  @Get('get/:min&:max&:loaisach&:theloai?page=:page')
+  @Get('get/:min&:max&:loaisach&:theloai/page=:page')
   getBookCateAndPrice(
     @Param('min') min: number,
     @Param('max') max: number,
@@ -137,6 +145,23 @@ export class BookController {
   @Get('search/:search/page=:page')
   searchBook(@Param('search') search: string, @Param('page') page: number) {
     return this.bookService.searchBook(search, page);
+  }
+  @Patch(':id')
+  update(
+    @Param('id') id: string,
+    @Body()
+    bookNameData: {
+      isHotSearch: boolean;
+      isHot: boolean;
+    },
+  ): Promise<BookModel> {
+    const { isHotSearch, isHot } = bookNameData;
+    return this.bookService.update({
+      where: { id: Number(id) },
+      data: {
+        ...bookNameData,
+      },
+    });
   }
   @Delete(':id')
   remove(@Param('id') id: number) {
