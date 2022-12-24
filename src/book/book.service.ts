@@ -22,6 +22,7 @@ export class BookService {
         loaiSach: true,
         nhaCungCap: true,
         gia: true,
+        nhaXuatBan: true,
         isHot: true,
         isHotSearch: true,
       },
@@ -191,6 +192,7 @@ export class BookService {
         bia: true,
         loaiSach: true,
         nhaCungCap: true,
+        nhaXuatBan: true,
         gia: true,
       },
     });
