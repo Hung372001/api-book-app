@@ -221,6 +221,7 @@ export class BookService {
         bia: true,
         loaiSach: true,
         nhaCungCap: true,
+        nhaXuatBan: true,
         gia: true,
       },
     });
