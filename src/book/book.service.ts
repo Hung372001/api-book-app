@@ -39,6 +39,7 @@ export class BookService {
         bia: true,
         loaiSach: true,
         nhaCungCap: true,
+        nhaXuatBan: true,
         gia: true,
         isHot: true,
         isHotSearch: true,
@@ -54,6 +55,7 @@ export class BookService {
         theLoai: true,
         tacGia: true,
         bia: true,
+        nhaXuatBan: true,
         loaiSach: true,
         nhaCungCap: true,
         gia: true,
@@ -71,6 +73,7 @@ export class BookService {
         bia: true,
         loaiSach: true,
         nhaCungCap: true,
+        nhaXuatBan: true,
         gia: true,
       },
     });
@@ -86,6 +89,7 @@ export class BookService {
         bia: true,
         loaiSach: true,
         nhaCungCap: true,
+        nhaXuatBan: true,
         gia: true,
       },
     });
@@ -101,6 +105,7 @@ export class BookService {
         bia: true,
         loaiSach: true,
         nhaCungCap: true,
+        nhaXuatBan: true,
         gia: true,
       },
     });
@@ -116,6 +121,7 @@ export class BookService {
         bia: true,
         loaiSach: true,
         nhaCungCap: true,
+        nhaXuatBan: true,
         gia: true,
       },
     });
@@ -140,6 +146,7 @@ export class BookService {
         tacGia: true,
         bia: true,
         loaiSach: true,
+        nhaXuatBan: true,
         nhaCungCap: true,
         gia: true,
       },
@@ -160,6 +167,7 @@ export class BookService {
         bookName: true,
         theLoai: true,
         tacGia: true,
+        nhaXuatBan: true,
         bia: true,
         loaiSach: true,
         nhaCungCap: true,
@@ -189,6 +197,7 @@ export class BookService {
         bookName: true,
         theLoai: true,
         tacGia: true,
+
         bia: true,
         loaiSach: true,
         nhaCungCap: true,
