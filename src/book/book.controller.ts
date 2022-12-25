@@ -11,6 +11,8 @@ import { BookService } from './book.service';
 import { Book as BookModel } from '@prisma/client';
 import { LoaiSach } from 'src/loai-sach/entities/loai-sach.entity';
 import { TheLoai } from 'src/the-loai/entities/the-loai.entity';
+import { fillterTest } from './dto/filter-book-price.dto';
+import { Req, Res } from '@nestjs/common/decorators';
 @Controller('book')
 export class BookController {
   constructor(private readonly bookService: BookService) {}
@@ -83,6 +85,18 @@ export class BookController {
       isHotSearch: false,
     });
   }
+  @Post('test/page=:page')
+  findTest(@Body() dtoFilter: fillterTest, @Param('page') page: number) {
+    return this.bookService.findMuti(dtoFilter, page);
+  }
+  @Post('search/:search/page=:page')
+  searchBook(
+    @Body() dtoFilter: fillterTest,
+    @Param('search') search: string,
+    @Param('page') page: number,
+  ) {
+    return this.bookService.searchBook(dtoFilter, search, page);
+  }
   @Get()
   findAll() {
     return this.bookService.findAll();
@@ -103,6 +117,7 @@ export class BookController {
   findNhaXuatBan(@Param('nxp') category: string) {
     return this.bookService.findNhaXuatBan(category);
   }
+
   @Get('fillterPrice/:min&:max/page=:page')
   getBookPrice(
     @Param('min') min: number,
@@ -142,10 +157,7 @@ export class BookController {
   ) {
     return this.bookService.getBookCate(min, max, LoaiSach, page);
   }
-  @Get('search/:search/page=:page')
-  searchBook(@Param('search') search: string, @Param('page') page: number) {
-    return this.bookService.searchBook(search, page);
-  }
+
   @Patch(':id')
   update(
     @Param('id') id: string,
