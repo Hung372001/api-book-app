@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Book, Prisma } from '@prisma/client';
 import { PrismaService } from 'prisma/prisma.service';
 import { MoreThan } from 'typeorm';
-import { FilterBookPriceDto } from './dto/filter-book-price.dto';
+import { FilterBookPriceDto, fillterTest } from './dto/filter-book-price.dto';
 @Injectable()
 export class BookService {
   constructor(private prisma: PrismaService) {}
@@ -46,6 +46,42 @@ export class BookService {
       },
     });
     return { findBookName };
+  }
+  async findMuti(fillter: fillterTest, page: number) {
+    const {
+      nameloaiSach,
+      nameTheLoai,
+      nameNhaXuatBan,
+      nameBia,
+      minPrice,
+      maxPrice,
+    } = fillter;
+    const find = await this.prisma.book.findMany({
+      take: 12,
+      skip: (page - 1) * 3,
+      where: {
+        loaiSachName: nameloaiSach != null ? nameloaiSach : undefined,
+        TheLoaiName: nameTheLoai != null ? nameTheLoai : undefined,
+        nhaXuatBanName: nameNhaXuatBan != null ? nameNhaXuatBan : undefined,
+        biaName: nameBia != null ? nameBia : undefined,
+        gia: {
+          gte: Number(minPrice),
+          lte: Number(maxPrice),
+        },
+      },
+      select: {
+        id: true,
+        bookName: true,
+        theLoai: true,
+        tacGia: true,
+        bia: true,
+        nhaXuatBan: true,
+        loaiSach: true,
+        nhaCungCap: true,
+        gia: true,
+      },
+    });
+    return { find };
   }
   async findCategory(TheLoaiName: string) {
     const findBookName = await this.prisma.book.findMany({
@@ -127,11 +163,27 @@ export class BookService {
     });
     return { findBookName };
   }
-  async searchBook(searchBook: string, page: number) {
+  async searchBook(fillter: fillterTest, searchBook: string, page: number) {
+    const {
+      nameloaiSach,
+      nameTheLoai,
+      nameNhaXuatBan,
+      nameBia,
+      minPrice,
+      maxPrice,
+    } = fillter;
     const findBookName = await this.prisma.book.findMany({
       take: 12,
       skip: (page - 1) * 3,
       where: {
+        loaiSachName: nameloaiSach != null ? nameloaiSach : undefined,
+        TheLoaiName: nameTheLoai != null ? nameTheLoai : undefined,
+        nhaXuatBanName: nameNhaXuatBan != null ? nameNhaXuatBan : undefined,
+        biaName: nameBia != null ? nameBia : undefined,
+        gia: {
+          gte: Number(minPrice),
+          lte: Number(maxPrice),
+        },
         OR: [
           {
             nameBook: {
@@ -187,7 +239,6 @@ export class BookService {
       skip: (page - 1) * 3,
       where: {
         loaiSachName,
-
         gia: {
           gte: Number(min),
           lte: Number(max),
