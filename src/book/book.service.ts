@@ -56,9 +56,45 @@ export class BookService {
       minPrice,
       maxPrice,
     } = fillter;
+    console.log(fillter.nameTheLoai);
     const find = await this.prisma.book.findMany({
       take: 12,
       skip: (page - 1) * 3,
+      where: {
+        loaiSachName: nameloaiSach != null ? nameloaiSach : undefined,
+        TheLoaiName: nameTheLoai != null ? nameTheLoai : undefined,
+        nhaXuatBanName: nameNhaXuatBan != null ? nameNhaXuatBan : undefined,
+        biaName: nameBia != null ? nameBia : undefined,
+        gia: {
+          gte: Number(minPrice),
+          lte: Number(maxPrice),
+        },
+      },
+      select: {
+        id: true,
+        bookName: true,
+        theLoai: true,
+        tacGia: true,
+        bia: true,
+        nhaXuatBan: true,
+        loaiSach: true,
+        nhaCungCap: true,
+        gia: true,
+      },
+    });
+    return { find };
+  }
+  async findAllCate(fillter: fillterTest) {
+    const {
+      nameloaiSach,
+      nameTheLoai,
+      nameNhaXuatBan,
+      nameBia,
+      minPrice,
+      maxPrice,
+    } = fillter;
+    console.log(fillter.nameTheLoai);
+    const find = await this.prisma.book.findMany({
       where: {
         loaiSachName: nameloaiSach != null ? nameloaiSach : undefined,
         TheLoaiName: nameTheLoai != null ? nameTheLoai : undefined,

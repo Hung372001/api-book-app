@@ -89,6 +89,11 @@ export class BookController {
   findTest(@Body() dtoFilter: fillterTest, @Param('page') page: number) {
     return this.bookService.findMuti(dtoFilter, page);
   }
+  @Post('test/page=:page')
+  findAllCate(@Body() dtoFilter: fillterTest) {
+    return this.bookService.findAllCate(dtoFilter);
+  }
+
   @Post('search/:search/page=:page')
   searchBook(
     @Body() dtoFilter: fillterTest,
