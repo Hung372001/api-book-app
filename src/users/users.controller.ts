@@ -12,7 +12,6 @@ export class UsersController {
   getMyUser(@Param() params: { id: number }, @Req() req) {
     return this.usersService.getMyUser(params.id, req);
   }
-  @UseGuards(JwtAuthGuard)
   @Get('email/:email')
   getMyUserbyEmail(@Param() params: { email: string }, @Req() req) {
     return this.usersService.getMyUserbyEmail(params.email, req);
