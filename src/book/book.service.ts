@@ -241,6 +241,46 @@ export class BookService {
     });
     return { findBookName };
   }
+  async searchBookAll(fillter: fillterTest, searchBook: string) {
+    const {
+      nameloaiSach,
+      nameTheLoai,
+      nameNhaXuatBan,
+      nameBia,
+      minPrice,
+      maxPrice,
+    } = fillter;
+    const findBookName = await this.prisma.book.findMany({
+      where: {
+        loaiSachName: nameloaiSach != null ? nameloaiSach : undefined,
+        TheLoaiName: nameTheLoai != null ? nameTheLoai : undefined,
+        nhaXuatBanName: nameNhaXuatBan != null ? nameNhaXuatBan : undefined,
+        biaName: nameBia != null ? nameBia : undefined,
+        gia: {
+          gte: Number(minPrice),
+          lte: Number(maxPrice),
+        },
+        OR: [
+          {
+            nameBook: {
+              contains: searchBook,
+            },
+          },
+        ],
+      },
+      select: {
+        bookName: true,
+        theLoai: true,
+        tacGia: true,
+        bia: true,
+        loaiSach: true,
+        nhaXuatBan: true,
+        nhaCungCap: true,
+        gia: true,
+      },
+    });
+    return { findBookName };
+  }
   async getBookPrice(min: number, max: number, page: number) {
     const findBookName = await this.prisma.book.findMany({
       take: 12,

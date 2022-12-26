@@ -19,8 +19,11 @@ export class LoaiSachService {
         id: true,
         name: true,
         NgonNguSach: true,
-        theLoai: true,
-        book: true,
+        theLoai: {
+          include: {
+            book: true,
+          },
+        },
       },
     });
     return { loaiSach };

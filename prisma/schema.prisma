@@ -75,6 +75,7 @@ model LoaiSach {
   updateAt      DateTime     @updatedAt()
   NgonNguSach   NgonNguSach? @relation(fields: [ngonNguSachId], references: [id])
   ngonNguSachId Int?
+  isHot         Boolean?
 }
 
 model NgonNguSach {

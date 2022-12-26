@@ -102,6 +102,14 @@ export class BookController {
   ) {
     return this.bookService.searchBook(dtoFilter, search, page);
   }
+
+  @Post('search/:search/')
+  searchBookAll(
+    @Body() dtoFilter: fillterTest,
+    @Param('search') search: string,
+  ) {
+    return this.bookService.searchBookAll(dtoFilter, search);
+  }
   @Get()
   findAll() {
     return this.bookService.findAll();

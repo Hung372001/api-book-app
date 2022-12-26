@@ -19,7 +19,7 @@ export class LoaiSachController {
 
   @Post()
   create(
-    @Body() loaiSachData: { name: string; ngonNguSach: string },
+    @Body() loaiSachData: { name: string; ngonNguSach: string; isHot: boolean },
   ): Promise<LoaiSachModel> {
     const { name, ngonNguSach } = loaiSachData;
     return this.loaiSachService.create({
@@ -27,6 +27,7 @@ export class LoaiSachController {
       NgonNguSach: {
         connect: { name: ngonNguSach },
       },
+      isHot: false,
     });
   }
 

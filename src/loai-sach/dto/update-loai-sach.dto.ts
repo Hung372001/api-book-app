@@ -10,4 +10,7 @@ export class UpdateLoaiSachDto extends PartialType(CreateLoaiSachDto) {
   @IsString()
   @IsNotEmpty()
   ngonngu: string;
+
+  @IsNotEmpty()
+  isHot: boolean;
 }
