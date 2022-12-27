@@ -21,7 +21,15 @@ export class LoaiSachService {
         NgonNguSach: true,
         theLoai: {
           include: {
-            book: true,
+            book: {
+              include: {
+                bookName: {
+                  select: {
+                    bookImg: true,
+                  },
+                },
+              },
+            },
           },
         },
       },
